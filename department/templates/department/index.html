@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>phonebook</title>
+</head>
+<body>
+    <center>
+    <center>List of all departments saved in the database</center>
+    <table border="2">
+        <tr>
+            <th>SN</th>
+            <th>Name</th>
+            <th>code</th>
+            <th>Action</th>
+        </tr>
+
+        {% for school in  departments %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ school.name }}</td>
+            <td>{{ school.code }}</td>
+            <td>
+                <a href="{% url 'delete_department' school.id %}"
+                onclick="return confirm('Do you really wanna delete ?')">Delete</a>
+
+                -
+            <a href="{% url 'update_department' school.id %}">Update</a>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+    
+
+    <h2><a href="{% url 'add_department' %}">Click to add</a></h2>
+
+    {% if messages %}
+
+    {% for message in messages  %}
+    <h4>{{ message }}</h4>
+    {% endfor %}
+
+    {% endif %}
+</center>
+    
+</body>
+</html>
